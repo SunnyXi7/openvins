@@ -1,6 +1,7 @@
 FROM ros:jazzy
 
 # Install system dependencies
+# Added libceres-dev explicit install
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     cmake \
@@ -11,29 +12,35 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgflags-dev \
     libatlas-base-dev \
     libsuitesparse-dev \
+    libceres-dev \
     wget \
+    nano \
     && rm -rf /var/lib/apt/lists/*
 
 # Create workspace
 WORKDIR /root/openvins_ws/src
 
-# Copy the current directory (open_vins) into the container
-# Assuming this Dockerfile is built from the workspace root or src/open_vins is available
+# Copy the source code
+# Ensure you have a .dockerignore file!
 COPY . /root/openvins_ws/src/open_vins
 
 # Install ROS dependencies
 WORKDIR /root/openvins_ws
+# Update rosdep database just in case
 RUN . /opt/ros/jazzy/setup.sh && \
+    rosdep update && \
     apt-get update && \
     rosdep install --from-paths src --ignore-src -r -y && \
     rm -rf /var/lib/apt/lists/*
 
 # Build
+# Using Release mode is CORRECT for VIO performance
 RUN . /opt/ros/jazzy/setup.sh && \
     colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
 
 # Source entrypoint
 COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
+
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["bash"]
