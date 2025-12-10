@@ -3,6 +3,8 @@ FROM ros:jazzy
 # Install system dependencies
 # Added libceres-dev explicit install
 # Added ros-jazzy-realsense2-camera so the container can launch the camera
+# Added ros-jazzy-rviz2 and ros-jazzy-rviz-common for visualization
+# Added ros-jazzy-image-transport-plugins for compressed image support if needed
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     cmake \
@@ -16,6 +18,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libceres-dev \
     ros-jazzy-realsense2-camera \
     ros-jazzy-realsense2-description \
+    ros-jazzy-rviz2 \
+    ros-jazzy-rviz-common \
+    ros-jazzy-rviz-default-plugins \
+    ros-jazzy-image-transport-plugins \
     wget \
     nano \
     && rm -rf /var/lib/apt/lists/*
