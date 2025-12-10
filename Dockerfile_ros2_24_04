@@ -2,6 +2,7 @@ FROM ros:jazzy
 
 # Install system dependencies
 # Added libceres-dev explicit install
+# Added ros-jazzy-realsense2-camera so the container can launch the camera
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     cmake \
@@ -13,6 +14,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libatlas-base-dev \
     libsuitesparse-dev \
     libceres-dev \
+    ros-jazzy-realsense2-camera \
+    ros-jazzy-realsense2-description \
     wget \
     nano \
     && rm -rf /var/lib/apt/lists/*
