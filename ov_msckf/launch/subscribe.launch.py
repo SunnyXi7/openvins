@@ -32,19 +32,39 @@ launch_args = [
     ),
     DeclareLaunchArgument(
         name="use_stereo",
-        default_value="true",
+        default_value="false",
         description="if we have more than 1 camera, if we should try to track stereo constraints between pairs",
     ),
     DeclareLaunchArgument(
         name="max_cameras",
-        default_value="2",
+        default_value="1",
         description="how many cameras we have 1 = mono, 2 = stereo, >2 = binocular (all mono tracking)",
     ),
     DeclareLaunchArgument(
         name="save_total_state",
         default_value="false",
         description="record the total state with calibration and features to a txt file",
-    )
+    ),
+    DeclareLaunchArgument(
+        name="topic_imu",
+        default_value="/imu0",
+        description="IMU topic to subscribe to",
+    ),
+    DeclareLaunchArgument(
+        name="topic_camera0",
+        default_value="/cam0/image_raw",
+        description="Camera 0 image topic to subscribe to",
+    ),
+    DeclareLaunchArgument(
+        name="topic_camera0_info",
+        default_value="/camera/camera/color/camera_info",
+        description="Camera 0 info topic to subscribe to",
+    ),
+    DeclareLaunchArgument(
+        name="topic_camera1",
+        default_value="/cam1/image_raw",
+        description="Camera 1 image topic to subscribe to",
+    ),
 ]
 
 def launch_setup(context):
@@ -74,6 +94,15 @@ def launch_setup(context):
                         config_path)
                     )
             ]
+    
+    # Setup topic remappings
+    remappings = [
+        ('/imu0', LaunchConfiguration("topic_imu")),
+        ('/cam0/image_raw', LaunchConfiguration("topic_camera0")),
+        ('/cam0/camera_info', LaunchConfiguration("topic_camera0_info")),
+        ('/cam1/image_raw', LaunchConfiguration("topic_camera1")),
+    ]
+    
     node1 = Node(
         package="ov_msckf",
         executable="run_subscribe_msckf",
@@ -87,6 +116,7 @@ def launch_setup(context):
             {"save_total_state": LaunchConfiguration("save_total_state")},
             {"config_path": config_path},
         ],
+        remappings=remappings,
     )
 
     node2 = Node(

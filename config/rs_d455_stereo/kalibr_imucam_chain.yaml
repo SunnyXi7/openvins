@@ -8,11 +8,11 @@ cam0:
     - [0.0, 0.0, 0.0, 1.0]
   cam_overlaps: [1]
   camera_model: pinhole
-  distortion_coeffs: [0.0019712980218442736, -0.0011090942743057983, -0.0006211171700097682, -0.0034327653409294196]
+  distortion_coeffs: [0.0, 0.0, 0.0, 0.0]
   distortion_model: radtan
-  intrinsics: [320.17488748238287, 320.0283628174116, 314.0668795454674, 180.36893447271257]
-  resolution: [640, 360]
-  rostopic: /camera/infra1/image_rect_raw
+  intrinsics: [430.0158386230469, 430.0158386230469, 427.3062744140625, 238.315185546875]
+  resolution: [848, 480]
+  rostopic: /camera/camera/infra1/image_rect_raw
   timeshift_cam_imu: 0.004639958649183853
 
 cam1:
@@ -28,11 +28,11 @@ cam1:
     - [0.0, 0.0, 0.0, 1.0]
   cam_overlaps: [0]
   camera_model: pinhole
-  distortion_coeffs: [0.00415520544025779, -0.003951065114859482, -0.00042589527047545586, -0.00442085250772721]
+  distortion_coeffs: [0.0, 0.0, 0.0, 0.0]
   distortion_model: radtan
-  intrinsics: [319.69438067702725, 320.1948319604044, 313.46161305104766, 180.7178241492703]
-  resolution: [640, 360]
-  rostopic: /camera/infra2/image_rect_raw
+  intrinsics: [430.0158386230469, 430.0158386230469, 427.3062744140625, 238.315185546875]
+  resolution: [848, 480]
+  rostopic: /camera/camera/infra2/image_rect_raw
   timeshift_cam_imu: 0.005012709485041032
 
 # cam0:

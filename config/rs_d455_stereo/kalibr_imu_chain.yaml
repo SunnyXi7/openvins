@@ -16,12 +16,12 @@ imu0:
   # density x5
   # walk x10
   #Accelerometer
-  accelerometer_noise_density: 0.018325460766195713 
-  accelerometer_random_walk: 0.0031526548679969497 
+  accelerometer_noise_density: 0.0087592337
+  accelerometer_random_walk: 0.00036333702
   #Gyroscope
-  gyroscope_noise_density: 0.005658445654838128
-  gyroscope_random_walk: 4.9244827968800026e-04 
-  rostopic: /camera/imu
+  gyroscope_noise_density: 0.0020203826
+  gyroscope_random_walk: 1.6763382e-05 
+  rostopic: /camera/camera/imu
   time_offset: 0.0
   update_rate: 200
   # three different modes supported:
